@@ -73,7 +73,7 @@ class GildedRose
     return item.quality if minimum_sell?(item)
 
     item.quality -= rate if positive_sell?(item)
-    
+
     item.quality = 0 if item.quality.negative?
   end
 
