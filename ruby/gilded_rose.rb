@@ -27,7 +27,7 @@ class GildedRose
   private
 
   def update_aged_brie(item)
-    increase_quality(item)
+    increase_quality(item, 2)
     decrease_sell_in(item)
   end
 
@@ -61,6 +61,8 @@ class GildedRose
     return item.quality if minimum_sell?(item)
 
     item.quality += rate if maximum_quality?(item)
+
+    item.quality = MAX_QUALITY if item.quality > MAX_QUALITY
   end
 
   def decrease_sell_in(item)
@@ -71,6 +73,8 @@ class GildedRose
     return item.quality if minimum_sell?(item)
 
     item.quality -= rate if positive_sell?(item)
+    
+    item.quality = 0 if item.quality.negative?
   end
 
   def positive_sell?(item)
